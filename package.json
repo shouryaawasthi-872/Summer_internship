@@ -1,0 +1,14 @@
+{
+  "name": "krmu-internship-portal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "K.R. Mangalam University — Full-Stack Internship Management Portal",
+  "scripts": {
+    "install:all":   "npm install --prefix portal/backend && npm install --prefix portal/frontend",
+    "dev:backend":   "npm run dev  --prefix portal/backend",
+    "dev:frontend":  "npm run dev  --prefix portal/frontend",
+    "start:backend": "npm run start --prefix portal/backend",
+    "build:frontend":"npm run build --prefix portal/frontend",
+    "seed":          "npm run seed  --prefix portal/backend"
+  }
+}

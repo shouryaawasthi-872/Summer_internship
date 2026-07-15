@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KRMU EDU – Login</title>
+  <link rel="stylesheet" href="login.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="card">
+
+      <!-- Logo & Heading -->
+      <div class="brand">
+        <div class="logo">
+          <span class="logo-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+          <span class="logo-text">KRMU<span class="logo-accent">EDU</span></span>
+        </div>
+        <p class="tagline">Login to continue to your account</p>
+      </div>
+
+      <!-- Role Selector -->
+      <p class="section-label">Login as</p>
+      <div class="role-grid">
+        <button class="role-btn active" data-role="student" onclick="selectRole(this)">
+          <i class="fa-solid fa-user-graduate"></i>
+          <span>Student</span>
+        </button>
+        <button class="role-btn" data-role="mentor" onclick="selectRole(this)">
+          <i class="fa-solid fa-chalkboard-user"></i>
+          <span>Mentor</span>
+        </button>
+        <button class="role-btn" data-role="admin" onclick="selectRole(this)">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Admin</span>
+        </button>
+        <button class="role-btn" data-role="superadmin" onclick="selectRole(this)">
+          <i class="fa-solid fa-crown"></i>
+          <span>Super Admin</span>
+        </button>
+      </div>
+
+      <!-- Email Field -->
+      <div class="field-group">
+        <label for="email">Email ID</label>
+        <div class="input-wrapper">
+          <i class="fa-regular fa-envelope input-icon"></i>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your college email"
+            autocomplete="email"
+          />
+          <span class="email-domain">@krmuedu.in</span>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="field-group">
+        <label for="password">Password</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-lock input-icon"></i>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+          />
+          <button class="toggle-password" onclick="togglePassword()" aria-label="Toggle password visibility" type="button">
+            <i class="fa-regular fa-eye-slash" id="eye-icon"></i>
+          </button>
+        </div>
+        <div class="forgot-row">
+          <a href="#" class="forgot-link">Forgot Password?</a>
+        </div>
+      </div>
+
+      <!-- Login Button -->
+      <button class="login-btn" onclick="handleLogin()">Login</button>
+
+      <!-- Divider -->
+      <div class="divider"><span>or</span></div>
+
+      <!-- Footer -->
+      <p class="footer-text">
+        Don't have an account?
+        <a href="#" class="contact-link">Contact your administrator</a>
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    function selectRole(el) {
+      document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function togglePassword() {
+      const input = document.getElementById('password');
+      const icon  = document.getElementById('eye-icon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+      } else {
+        input.type = 'password';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+      }
+    }
+
+    function handleLogin() {
+      const emailInput = document.getElementById('email').value.trim();
+      const password   = document.getElementById('password').value;
+      const role       = document.querySelector('.role-btn.active').dataset.role;
+
+      if (!emailInput || !password) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      // Build full email – append domain only if user hasn't typed it
+      const fullEmail = emailInput.endsWith('@krmuedu.in')
+        ? emailInput
+        : emailInput + '@krmuedu.in';
+
+      // Extract name from email for greeting
+      const namePart = fullEmail.split('@')[0];
+      const displayName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+
+      // Save session info
+      sessionStorage.setItem('krmu_role', role);
+      sessionStorage.setItem('krmu_email', fullEmail);
+      sessionStorage.setItem('krmu_name', displayName);
+
+      // Route based on role
+      if (role === 'admin' || role === 'superadmin') {
+        window.location.href = 'admin-dashboard.html';
+      } else {
+        // student and mentor go to student dashboard
+        window.location.href = 'student-dashboard.html';
+      }
+    }
+  </script>
+</body>
+</html>
