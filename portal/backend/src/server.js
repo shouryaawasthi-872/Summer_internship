@@ -14,11 +14,17 @@ connectDB();
 
 app.use(cors({
   origin: (origin, cb) => {
-    // Allow requests with no origin (mobile apps, curl, Postman) and any localhost
-    if (!origin || origin.includes('localhost')) return cb(null, true);
-    // Otherwise check against the configured FRONTEND_URL
-    if (origin === process.env.FRONTEND_URL) return cb(null, true);
-    cb(new Error('Not allowed by CORS'));
+    // Allow no-origin requests (Postman, curl, mobile apps)
+    if (!origin) return cb(null, true);
+    // Allow any localhost port (local dev)
+    if (origin.includes('localhost') || origin.includes('127.0.0.1')) return cb(null, true);
+    // Allow any Vercel deployment (*.vercel.app covers preview + production)
+    if (origin.endsWith('.vercel.app')) return cb(null, true);
+    // Allow the explicit FRONTEND_URL env var (custom domain)
+    if (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL) return cb(null, true);
+    // Allow Render preview URLs (for testing)
+    if (origin.endsWith('.onrender.com')) return cb(null, true);
+    cb(new Error(`CORS: origin not allowed → ${origin}`));
   },
   credentials: true,
 }));
