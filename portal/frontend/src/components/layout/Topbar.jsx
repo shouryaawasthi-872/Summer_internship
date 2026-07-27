@@ -4,6 +4,7 @@ import { HiOutlineMenu, HiOutlineBell } from 'react-icons/hi';
 import { notificationsAPI } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 import { getInitials } from '../../utils/helpers';
+import KRMUBrandHeader from '../common/KRMULogo';
 
 /* Route → page title */
 const PAGE_TITLES = {
@@ -164,17 +165,9 @@ export default function Topbar({ onMenuClick }) {
           borderBottom: '3px solid #C8102E',
         }}
       >
-        {/* Logo mark + full university name — visible on desktop */}
-        <div className="flex items-center gap-2.5">
-          <KRMULogoMark size={28} />
-          <div className="hidden sm:block leading-tight">
-            <p className="text-white font-extrabold text-xs tracking-wider leading-none">
-              K.R. MANGALAM UNIVERSITY
-            </p>
-            <p className="text-white/50 text-[9px] tracking-[0.20em] uppercase mt-0.5">
-              The Complete World of Education
-            </p>
-          </div>
+        {/* Official KRMU Brand Logo Header */}
+        <div className="flex items-center">
+          <KRMUBrandHeader crestSize={30} bannerSize="small" />
         </div>
 
         {/* Vertical separator */}

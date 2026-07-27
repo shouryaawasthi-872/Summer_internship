@@ -11,7 +11,7 @@ services:
       - key: PORT
         value: 10000
       - key: MONGO_URI
-        value: mongodb+srv://Shourya:Shourya%401234@cluster0.nbevegk.mongodb.net/internship-portal?retryWrites=true&w=majority&appName=Cluster0
+        value: mongodb+srv://Shourya:X86k5msf9gXFpnm5@cluster0.nbevegk.mongodb.net/internship-portal?retryWrites=true&w=majority&appName=Cluster0
       - key: JWT_SECRET
         value: krmu_internship_super_secret_key_2024
       - key: JWT_EXPIRE

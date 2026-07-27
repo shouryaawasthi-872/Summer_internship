@@ -2,23 +2,427 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body { @apply text-gray-900 bg-gray-50; }
-  input, select, textarea { @apply outline-none; }
+/* ── KR Mangalam University CSS Variables ─────────────────────────────── */
+:root {
+  --kr-blue:        #003087;
+  --kr-blue-dark:   #001f5c;
+  --kr-blue-deeper: #000c30;
+  --kr-red:         #C8102E;
+  --kr-red-dark:    #a50d24;
+  --kr-red-light:   #fce8ec;
+  --kr-white:       #ffffff;
+  --kr-gray:        #f4f6fb;
+  --kr-border:      rgba(0, 48, 135, 0.10);
+  --kr-shadow:      0 2px 12px rgba(0, 48, 135, 0.09);
+  --kr-shadow-md:   0 6px 24px rgba(0, 48, 135, 0.13);
+  --kr-shadow-lg:   0 12px 40px rgba(0, 48, 135, 0.16);
+  --kr-radius:      0.75rem;
+  --kr-radius-lg:   1rem;
+  --kr-radius-xl:   1.25rem;
 }
 
+/* ── Base ──────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply text-gray-900 bg-[#f4f6fb];
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  input, select, textarea {
+    @apply outline-none;
+  }
+
+  /* Custom scrollbar — KRMU blue tint */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f4f6fb;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 48, 135, 0.25);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 48, 135, 0.45);
+  }
+}
+
+/* ── KR Mangalam Gradient Header ───────────────────────────────────────── */
 @layer components {
-  .btn-primary { @apply bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed; }
-  .btn-secondary { @apply bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors; }
-  .btn-danger { @apply bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors; }
-  .btn-success { @apply bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors; }
-  .input-field { @apply w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-50 bg-white transition; }
-  .card { @apply bg-white rounded-xl border border-gray-100 shadow-sm; }
-  .badge-pending   { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800; }
-  .badge-approved  { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800; }
-  .badge-rejected  { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800; }
-  .badge-submitted { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800; }
-  .badge-info      { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800; }
-  .page-title { @apply text-xl font-bold text-gray-900; }
-  .section-label { @apply text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-1 mt-4; }
+
+  /* --- Header / Nav ---------------------------------------------------- */
+  .kr-header {
+    background: linear-gradient(135deg, #003087 0%, #001f5c 100%);
+    box-shadow: 0 2px 16px rgba(0, 48, 135, 0.25);
+  }
+
+  /* Sidebar: deep navy with a subtle red warmth at the bottom */
+  .kr-sidebar {
+    background: linear-gradient(180deg,
+      #002070 0%,
+      #001a5c 35%,
+      #001040 70%,
+      #000a28 100%
+    );
+    border-right: 1px solid rgba(200, 16, 46, 0.18);
+  }
+
+  /* --- Buttons --------------------------------------------------------- */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-lg
+           px-4 py-2 text-sm transition-all duration-200 disabled:opacity-50
+           disabled:cursor-not-allowed focus:outline-none focus:ring-2
+           focus:ring-offset-2 focus:ring-primary-500;
+    background-color: var(--kr-blue);
+    color: #fff;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--kr-blue-dark);
+    box-shadow: 0 4px 12px rgba(0, 48, 135, 0.35);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .btn-kr-red {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-lg
+           px-4 py-2 text-sm text-white transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none
+           focus:ring-2 focus:ring-offset-2 focus:ring-accent-500;
+    background-color: var(--kr-red);
+  }
+  .btn-kr-red:hover:not(:disabled) {
+    background-color: var(--kr-red-dark);
+    box-shadow: 0 4px 12px rgba(200, 16, 46, 0.35);
+    transform: translateY(-1px);
+  }
+  .btn-kr-red:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 font-medium rounded-lg
+           px-4 py-2 text-sm bg-white text-gray-700 transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+    border: 1px solid var(--kr-border);
+    box-shadow: 0 1px 3px rgba(0, 48, 135, 0.06);
+  }
+  .btn-secondary:hover:not(:disabled) {
+    @apply bg-primary-50 text-primary-700;
+    border-color: rgba(0, 48, 135, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 48, 135, 0.10);
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-lg
+           px-4 py-2 text-sm text-white transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: var(--kr-red);
+  }
+  .btn-danger:hover:not(:disabled) {
+    background-color: var(--kr-red-dark);
+    box-shadow: 0 4px 12px rgba(200, 16, 46, 0.30);
+    transform: translateY(-1px);
+  }
+
+  .btn-success {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-lg
+           px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-700 text-white
+           transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-success:hover:not(:disabled) {
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.30);
+    transform: translateY(-1px);
+  }
+
+  /* --- Form Inputs ----------------------------------------------------- */
+  .input-field {
+    @apply w-full rounded-lg px-3 py-2.5 text-sm bg-white text-gray-900
+           placeholder-gray-400 transition-all duration-200;
+    border: 1.5px solid #dde3ef;
+  }
+  .input-field:focus {
+    border-color: var(--kr-blue);
+    box-shadow: 0 0 0 3px rgba(0, 48, 135, 0.10);
+  }
+  .input-field:hover:not(:focus) {
+    border-color: #b3c4e0;
+  }
+
+  /* --- Cards ----------------------------------------------------------- */
+  .card {
+    @apply bg-white rounded-xl overflow-hidden;
+    border: 1px solid rgba(0, 48, 135, 0.08);
+    box-shadow: var(--kr-shadow);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover {
+    box-shadow: var(--kr-shadow-md);
+  }
+
+  .card-interactive {
+    @apply bg-white rounded-xl overflow-hidden cursor-pointer;
+    border: 1px solid rgba(0, 48, 135, 0.08);
+    box-shadow: var(--kr-shadow);
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+  .card-interactive:hover {
+    box-shadow: var(--kr-shadow-md);
+    border-color: rgba(200, 16, 46, 0.22);
+    transform: translateY(-2px);
+  }
+
+  /* --- Hero / Banner --------------------------------------------------- */
+  .kr-hero-banner {
+    background: linear-gradient(135deg, #002070 0%, #001a5c 55%, #000a28 100%);
+    @apply rounded-2xl p-6 text-white relative overflow-hidden;
+    border: 1px solid rgba(200, 16, 46, 0.20);
+    box-shadow: 0 4px 24px rgba(0, 48, 135, 0.20);
+  }
+  /* Top-left red accent bar */
+  .kr-hero-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, #C8102E 0%, #a50d24 100%);
+    border-radius: 99px 0 0 99px;
+    pointer-events: none;
+  }
+  /* Decorative glow circle */
+  .kr-hero-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    right: 40px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(200,16,46,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* --- Status Badges --------------------------------------------------- */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold
+           tracking-wide gap-1;
+  }
+  .badge-pending {
+    @apply badge bg-amber-50 text-amber-700;
+    border: 1px solid rgba(217, 119, 6, 0.2);
+  }
+  .badge-approved {
+    @apply badge bg-emerald-50 text-emerald-700;
+    border: 1px solid rgba(5, 150, 105, 0.2);
+  }
+  .badge-rejected {
+    @apply badge text-white;
+    background-color: var(--kr-red);
+    border: 1px solid rgba(200, 16, 46, 0.3);
+  }
+  .badge-submitted {
+    @apply badge bg-primary-50 text-primary-700;
+    border: 1px solid rgba(0, 48, 135, 0.2);
+  }
+  .badge-info {
+    @apply badge bg-sky-50 text-sky-700;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+  }
+
+  /* --- Sidebar Nav Link ------------------------------------------------ */
+  .nav-link {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+           transition-all duration-150 text-white/70;
+  }
+  .nav-link:hover {
+    @apply text-white;
+    background: rgba(255,255,255,0.10);
+  }
+  .nav-link.active {
+    @apply text-white;
+    background: rgba(255,255,255,0.15);
+    box-shadow: inset 3px 0 0 var(--kr-red);
+  }
+
+  /* --- Typography Helpers ---------------------------------------------- */
+  .page-title {
+    @apply text-xl font-bold;
+    color: var(--kr-blue);
+  }
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest px-3 mb-1 mt-4;
+    color: rgba(255,255,255,0.40);
+  }
+  .section-heading {
+    @apply text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3;
+  }
+
+  /* --- Divider --------------------------------------------------------- */
+  .kr-divider {
+    @apply border-t;
+    border-color: rgba(0, 48, 135, 0.08);
+  }
+
+  /* --- University Badge ------------------------------------------------ */
+  .kr-university-badge {
+    @apply inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1
+           rounded-full bg-primary-50 text-primary-700;
+    border: 1px solid rgba(0, 48, 135, 0.15);
+  }
+
+  /* --- Table ----------------------------------------------------------- */
+  .kr-table {
+    @apply w-full text-sm;
+  }
+  .kr-table thead th {
+    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider
+           bg-primary-50 text-primary-700;
+    border-bottom: 2px solid rgba(0, 48, 135, 0.12);
+  }
+  .kr-table tbody tr {
+    @apply border-b transition-colors;
+    border-color: rgba(0, 48, 135, 0.06);
+  }
+  .kr-table tbody tr:hover {
+    background: rgba(0, 48, 135, 0.03);
+  }
+  .kr-table tbody td {
+    @apply px-4 py-3 text-gray-700;
+  }
+
+  /* --- Approval Pipeline Steps ----------------------------------------- */
+  .pipeline-step-done {
+    @apply w-8 h-8 rounded-full flex items-center justify-center text-white text-xs
+           font-bold flex-shrink-0;
+    background: #003087;
+  }
+  .pipeline-step-pending {
+    @apply w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold
+           flex-shrink-0 bg-gray-100 text-gray-400;
+    border: 2px dashed #cbd5e1;
+  }
+  .pipeline-step-rejected {
+    @apply w-8 h-8 rounded-full flex items-center justify-center text-white text-xs
+           font-bold flex-shrink-0;
+    background: var(--kr-red);
+  }
+
+  /* --- Skeleton Loader ------------------------------------------------- */
+  .skeleton {
+    @apply bg-gray-200 rounded animate-pulse;
+  }
+  .skeleton-text {
+    @apply h-4 bg-gray-200 rounded animate-pulse;
+  }
+
+  /* --- Toast overrides ------------------------------------------------- */
+  .kr-toast-success {
+    border-left: 4px solid #003087 !important;
+  }
+  .kr-toast-error {
+    border-left: 4px solid var(--kr-red) !important;
+  }
+
+  /* --- Floating Action Button ------------------------------------------ */
+  .kr-fab {
+    @apply fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center
+           justify-center text-white shadow-lg transition-all duration-200
+           z-50 focus:outline-none focus:ring-4 focus:ring-accent-300;
+    background-color: var(--kr-red);
+  }
+  .kr-fab:hover {
+    background-color: var(--kr-red-dark);
+    box-shadow: 0 8px 24px rgba(200, 16, 46, 0.40);
+    transform: scale(1.07);
+  }
+
+  /* --- Empty State ------------------------------------------------------ */
+  .kr-empty-icon {
+    @apply w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4;
+    background: rgba(0, 48, 135, 0.07);
+    color: var(--kr-blue);
+  }
+
+  /* --- Progress Bar ---------------------------------------------------- */
+  .kr-progress-track {
+    @apply h-2 rounded-full overflow-hidden bg-gray-100;
+  }
+  .kr-progress-fill {
+    @apply h-full rounded-full transition-all duration-500;
+    background: linear-gradient(90deg, var(--kr-blue), var(--kr-red));
+  }
+}
+
+/* ── Utility overrides ─────────────────────────────────────────────────── */
+@layer utilities {
+  .text-kr-blue  { color: var(--kr-blue); }
+  .text-kr-red   { color: var(--kr-red); }
+  .bg-kr-blue    { background-color: var(--kr-blue); }
+  .bg-kr-red     { background-color: var(--kr-red); }
+  .border-kr-blue { border-color: var(--kr-blue); }
+  .border-kr-red  { border-color: var(--kr-red); }
+
+  .ring-kr-blue {
+    --tw-ring-color: rgba(0, 48, 135, 0.30);
+  }
+
+  /* Gradient text */
+  .text-kr-gradient {
+    background: linear-gradient(135deg, var(--kr-blue), var(--kr-red));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow effect on hover for red CTAs */
+  .shadow-kr-red {
+    box-shadow: 0 4px 16px rgba(200, 16, 46, 0.30);
+  }
+  .shadow-kr-blue {
+    box-shadow: 0 4px 16px rgba(0, 48, 135, 0.25);
+  }
+}
+
+/* ── Animations ────────────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulseRed {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.40); }
+  70%       { box-shadow: 0 0 0 8px rgba(200, 16, 46, 0); }
+}
+
+.animate-fade-in-up   { animation: fadeInUp 0.35s ease both; }
+.animate-slide-in-left { animation: slideInLeft 0.30s ease both; }
+.animate-pulse-red     { animation: pulseRed 2s infinite; }
+
+/* stagger children */
+.stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger > *:nth-child(2) { animation-delay: 0.10s; }
+.stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger > *:nth-child(4) { animation-delay: 0.20s; }
+.stagger > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger > *:nth-child(6) { animation-delay: 0.30s; }
+
+/* ── Print ─────────────────────────────────────────────────────────────── */
+@media print {
+  .kr-sidebar, .kr-header, .no-print { display: none !important; }
+  body { background: white; }
+  .card { box-shadow: none; border: 1px solid #ddd; }
 }

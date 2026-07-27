@@ -14,8 +14,8 @@ const connectDB = async () => {
     console.log(`✅ MongoDB connected: ${conn.connection.host}`);
   } catch (err) {
     console.error(`❌ MongoDB connection failed: ${err.message}`);
-    console.error('   → Make sure MongoDB is running locally, or update MONGO_URI in .env to your Atlas connection string.');
-    process.exit(1);
+    console.error('   → Waiting 5 seconds before retrying connection...');
+    setTimeout(connectDB, 5000);
   }
 };
 

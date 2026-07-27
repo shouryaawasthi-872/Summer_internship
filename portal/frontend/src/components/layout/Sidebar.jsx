@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { getInitials } from '../../utils/helpers';
+import KRMUBrandHeader from '../common/KRMULogo';
 import {
   HiOutlineHome, HiOutlineBriefcase, HiOutlineDocumentText,
   HiOutlineFolder, HiOutlineCalendar, HiOutlineAcademicCap,
@@ -288,30 +289,9 @@ export default function Sidebar({ open, onClose }) {
           className="px-4 pt-5 pb-0 flex-shrink-0"
           style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}
         >
-          {/* Logo row */}
-          <div className="flex items-center gap-3 mb-3">
-            <KRMUCrest />
-            <div className="leading-tight min-w-0">
-              <p className="text-white font-extrabold text-sm leading-none tracking-wide">
-                K.R. Mangalam
-              </p>
-              <p className="text-white/55 text-[10px] mt-0.5 font-medium tracking-widest uppercase">
-                University
-              </p>
-            </div>
-          </div>
-
-          {/* Red banner strip — mirrors the real KRMU logo red bar */}
-          <div
-            className="mx-0 px-3 py-1.5 -mx-4 mb-0"
-            style={{
-              background: 'linear-gradient(90deg, #C8102E 0%, #a50d24 100%)',
-              borderTop: '1px solid rgba(255,255,255,0.08)',
-            }}
-          >
-            <p className="text-[9px] font-bold tracking-[0.18em] text-white/90 uppercase text-center">
-              The Complete World of Education
-            </p>
+          {/* Official KRMU Brand Logo Header */}
+          <div className="py-2 flex items-center justify-center">
+            <KRMUBrandHeader crestSize={42} bannerSize="small" />
           </div>
 
           {/* Role badge */}
