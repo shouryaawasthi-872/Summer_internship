@@ -2,8 +2,10 @@ const jwt = require('jsonwebtoken');
 const Notification = require('../models/Notification');
 
 /** Generate JWT token */
-exports.generateToken = (id) =>
-  jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
+exports.generateToken = (id) => {
+  const expiresIn = process.env.JWT_EXPIRE || process.env.JWT_EXPIRES || '7d';
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn });
+};
 
 /** Send token response */
 exports.sendToken = (user, statusCode, res) => {
